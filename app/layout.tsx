@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Jersey_25 } from "next/font/google";
 import "./globals.css";
-import NavBar from "./components/navbar/page";
+import NavBar from "./_components/navbar/page";
+import GoogleMaps from "./_components/googlemaps/page";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const jersey25 = Jersey_25({
+  weight: '400', // Only 400 is available for this font
+  subsets: ['latin'],
+  variable: '--font-jersey',
 });
 
 export const metadata: Metadata = {
@@ -25,11 +22,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <NavBar />
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${jersey25.variable} antialiased`}>
+        <NavBar />
+        <div className="flex justify-between bg-gray-200">
+          <section className="w-3/8 h-1000 border-r-2 border-black">
+            {children}
+          </section>
+          <GoogleMaps />
+        </div>
       </body>
     </html>
   );
